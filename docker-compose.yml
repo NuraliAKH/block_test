@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:14
+    container_name: tavakkalna-db
+    environment:
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: '12345678'
+      POSTGRES_DB: 'tavakkalna'
+      LOG_STATEMENT: 'all'
+      LOG_DURATION: 'on'
+    restart: unless-stopped
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - db_backups:/backups
+      - db_logs:/var/log
+    networks:
+      - tavakkalna-network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: tavakkalna-pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'admin@admin.com'
+      PGADMIN_DEFAULT_PASSWORD: 'admin'
+    restart: unless-stopped
+    depends_on:
+      - db
+    networks:
+      - tavakkalna-network
+    ports:
+      - '8080:80'
+
+volumes:
+  db_data:
+  db_backups:
+  db_logs:
+networks:
+  tavakkalna-network:
+    driver: bridge

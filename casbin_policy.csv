@@ -1,0 +1,3 @@
+p, Master Manager, *, *, *, allow
+p, Branch Manager, *, *, *, allow
+p, Registered User, airline, name, update, allow
