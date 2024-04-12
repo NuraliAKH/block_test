@@ -14,6 +14,7 @@ import { EventsGateway } from './events/events.gateway';
 import { BlockModule } from './modules/test-block/block.module';
 import { ScienceModule } from './modules/science/science.module';
 import { TestModule } from './modules/test/tests.module';
+import { UserTestModule } from './modules/user-test/tests.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { TestModule } from './modules/test/tests.module';
     BlockModule,
     ScienceModule,
     TestModule,
+    UserTestModule,
   ],
   controllers: [AppController],
   providers: [
