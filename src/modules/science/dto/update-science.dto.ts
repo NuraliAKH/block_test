@@ -1,7 +1,7 @@
-import { Block } from '@prisma/client';
+import { TestBlock } from '@prisma/client';
 import { IsOptional } from 'class-validator';
 
-export class UpdateScienceDto implements Partial<Block> {
+export class UpdateScienceDto implements Partial<TestBlock> {
   @IsOptional()
   length?: number;
 
