@@ -28,29 +28,41 @@ model Role {
 }
 
 model TestBlock {
-  id        Int        @id @default(autoincrement())
-  length    Int        @default(0)
-  correct   Int        @default(0)
-  incorrect Int        @default(0)
-  result    Int        @default(0)
-  User      User?      @relation(fields: [userId], references: [id])
-  userId    Int?
-  tests     Test[]
-  sciences  Science[]
-  UserTest  UserTest[]
+  id                 Int                  @id @default(autoincrement())
+  length             Int                  @default(0)
+  correct            Int                  @default(0)
+  incorrect          Int                  @default(0)
+  result             Int                  @default(0)
+  User               User?                @relation(fields: [userId], references: [id])
+  userId             Int?
+  tests              Test[]
+  sciences           Science[]
+  UserTest           UserTest[]
+  TestBlockToScience TestBlockToScience[]
+}
+
+model TestBlockToScience {
+  id          Int       @id @default(autoincrement())
+  testBlock   TestBlock @relation(fields: [testBlockId], references: [id])
+  testBlockId Int
+  science     Science   @relation(fields: [scienceId], references: [id])
+  scienceId   Int
+
+  @@unique([testBlockId, scienceId], name: "unique_TestBlockToScience")
 }
 
 model Science {
-  id        Int        @id @default(autoincrement())
-  name      String
-  length    Int        @default(30)
-  correct   Int        @default(0)
-  incorrect Int        @default(0)
-  rusult    Int        @default(0)
-  block     TestBlock? @relation(fields: [blockId], references: [id])
-  blockId   Int?
-  tests     Test[]
-  UserTest  UserTest[]
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  length             Int                  @default(30)
+  correct            Int                  @default(0)
+  incorrect          Int                  @default(0)
+  rusult             Int                  @default(0)
+  block              TestBlock?           @relation(fields: [blockId], references: [id])
+  blockId            Int?
+  tests              Test[]
+  UserTest           UserTest[]
+  TestBlockToScience TestBlockToScience[]
 }
 
 model Test {

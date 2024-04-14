@@ -11,7 +11,22 @@ export class ScienceService {
 
   findAll() {
     return this.prismaService.science.findMany({
-      select: { tests: true },
+      include: {
+        tests: {
+          select: {
+            id: true,
+            answer: true,
+            questionNumber: true,
+          },
+        },
+        UserTest: {
+          select: {
+            id: true,
+            answer: true,
+            questionNumber: true,
+          },
+        },
+      },
     });
   }
 

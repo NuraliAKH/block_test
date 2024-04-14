@@ -22,7 +22,6 @@ import { RolesGuard } from '../auth/roles.guard';
 export class ScienceController {
   constructor(private scienceService: ScienceService) {}
 
-  // GET method example
   @Get()
   @Roles(Role.Manager)
   async findAll(): Promise<any> {
@@ -31,7 +30,6 @@ export class ScienceController {
     return { data: sciencees };
   }
 
-  // GET with params example
   @Get(':id')
   @Roles(Role.Manager)
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<any> {
@@ -39,7 +37,6 @@ export class ScienceController {
     return { data };
   }
 
-  // POST method example
   @Post()
   @Roles(Role.Manager)
   async create(@Body() createDto: CreateScienceDto): Promise<any> {
@@ -47,7 +44,6 @@ export class ScienceController {
     return { data };
   }
 
-  // PUT method example
   @Put(':id')
   @Roles(Role.Manager)
   async update(
@@ -58,7 +54,6 @@ export class ScienceController {
     return { data };
   }
 
-  // PATCH method example
   @Patch(':id')
   @Roles(Role.Manager)
   async partialUpdate(
@@ -69,7 +64,6 @@ export class ScienceController {
     return { data };
   }
 
-  // DELETE method example
   @Roles(Role.Manager)
   @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number): Promise<any> {
